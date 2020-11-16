@@ -127,4 +127,86 @@ def game_hash
   }
 end
 
-# Write code here
+def helper_hash 
+  # how would i get this method to return a new hash of hashes with all the players?
+  game_hash.each do |team, teamHash| 
+    teamHash.each do |infoKeys, data|
+      if infoKeys == :players 
+        player_hash = Hash[data.map { |player| [player[:player_name], player] } ]
+      end 
+    end
+  end
+end
+
+
+def num_points_scored(player_name)
+    #game_hash -> :home -> :players -> [ -> { :player_name 
+  game_hash.each do |team, teamHash| 
+    teamHash[:players].each do |hash|
+      return hash[:points] if hash[:player_name] == player_name
+    end 
+  end   
+end 
+
+def shoe_size(player_name)
+  game_hash.each do |team, teamHash| 
+    teamHash[:players].each do |hash|
+      return hash[:shoe] if hash[:player_name] == player_name
+    end 
+  end  
+end
+
+def team_colors(team_name)
+  #game_hash -> :home -> :colors 
+  game_hash.each do |team, teamHash|
+    return teamHash[:colors] if teamHash[:team_name] == team_name
+  end
+end
+
+def team_names
+  #game_hash -> :home -> :team_name 
+  #collect into an array and return array of both team team_names
+  both_teams = []
+  game_hash.each do |team, teamHash|
+    both_teams << teamHash[:team_name]
+  end
+  return both_teams
+end
+
+def player_numbers(team_name)
+  #game_hash -> :home -> :players -> [ { :number 
+  #collect all :number and store in an array, return sorted array
+  all_player_numbers = []
+  game_hash.each do |team, teamHash|
+    if teamHash[:team_name] == team_name 
+      teamHash[:players].each do |hash|
+        all_player_numbers << hash[:number]
+      end
+    end
+  end
+  return all_player_numbers.sort 
+end
+
+def player_stats(player_name)
+  game_hash.each do |team, teamHash|
+    teamHash[:players].each do |hash|
+      return hash if hash[:player_name] == player_name
+    end 
+  end
+end
+
+def big_shoe_rebounds
+  #iterate through each team, update a shoe size counter -> hash? {name => shoe}
+  #return the :rebounds of that :player_name
+  big_shoe_counter = 0
+  rebound_counter = 0
+  game_hash.each do |team, teamHash|
+    teamHash[:players].each do |hash|
+      if hash[:shoe] > big_shoe_counter 
+        big_shoe_counter = hash[:shoe]
+        rebound_counter = hash[:rebounds]
+      end
+    end
+  end
+  return rebound_counter
+end
