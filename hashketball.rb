@@ -127,6 +127,10 @@ def game_hash
   }
 end
 
+##################
+#Find methods below v v v 
+##################
+
 def helper_hash 
   # how would i get this method to return a new hash of hashes with all the players?
   game_hash.each do |team, teamHash| 
@@ -148,6 +152,7 @@ def num_points_scored(player_name)
   end   
 end 
 
+
 def shoe_size(player_name)
   game_hash.each do |team, teamHash| 
     teamHash[:players].each do |hash|
@@ -156,12 +161,14 @@ def shoe_size(player_name)
   end  
 end
 
+
 def team_colors(team_name)
   #game_hash -> :home -> :colors 
   game_hash.each do |team, teamHash|
     return teamHash[:colors] if teamHash[:team_name] == team_name
   end
 end
+
 
 def team_names
   #game_hash -> :home -> :team_name 
@@ -172,6 +179,7 @@ def team_names
   end
   return both_teams
 end
+
 
 def player_numbers(team_name)
   #game_hash -> :home -> :players -> [ { :number 
@@ -186,6 +194,7 @@ def player_numbers(team_name)
   end
   return all_player_numbers.sort 
 end
+
 
 def player_stats(player_name)
   game_hash.each do |team, teamHash|
